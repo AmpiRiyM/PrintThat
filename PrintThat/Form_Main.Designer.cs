@@ -37,7 +37,10 @@
             this.timer_checker = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon_main = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_show = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_updateNprint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_close = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_properties = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown_multi = new System.Windows.Forms.NumericUpDown();
@@ -50,21 +53,18 @@
             this.button_from = new System.Windows.Forms.Button();
             this.textBox_from = new System.Windows.Forms.TextBox();
             this.panel_main = new System.Windows.Forms.Panel();
+            this.button_printers = new System.Windows.Forms.Button();
             this.button_multiplier = new System.Windows.Forms.Button();
+            this.button_properties = new System.Windows.Forms.Button();
+            this.button_refresh = new System.Windows.Forms.Button();
             this.button_print = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.Column_Del = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column_Check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column_File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column_Del = new System.Windows.Forms.DataGridViewImageColumn();
-            this.button_printers = new System.Windows.Forms.Button();
-            this.button_properties = new System.Windows.Forms.Button();
-            this.button_refresh = new System.Windows.Forms.Button();
-            this.toolStripMenuItem_show = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_updateNprint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_close = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel_properties.SuspendLayout();
@@ -132,10 +132,35 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(251, 76);
             // 
+            // toolStripMenuItem_show
+            // 
+            this.toolStripMenuItem_show.Image = global::PrintThat.Properties.Resources.window_dialog;
+            this.toolStripMenuItem_show.Name = "toolStripMenuItem_show";
+            this.toolStripMenuItem_show.Size = new System.Drawing.Size(250, 22);
+            this.toolStripMenuItem_show.Text = "Показать приложение";
+            this.toolStripMenuItem_show.Click += new System.EventHandler(this.toolStripMenuItem_show_Click);
+            // 
+            // toolStripMenuItem_updateNprint
+            // 
+            this.toolStripMenuItem_updateNprint.Enabled = false;
+            this.toolStripMenuItem_updateNprint.Image = global::PrintThat.Properties.Resources.keyboard_key_enter;
+            this.toolStripMenuItem_updateNprint.Name = "toolStripMenuItem_updateNprint";
+            this.toolStripMenuItem_updateNprint.Size = new System.Drawing.Size(250, 22);
+            this.toolStripMenuItem_updateNprint.Text = "Обновить список и распечатать";
+            this.toolStripMenuItem_updateNprint.Click += new System.EventHandler(this.toolStripMenuItem_updateNprint_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(247, 6);
+            // 
+            // toolStripMenuItem_close
+            // 
+            this.toolStripMenuItem_close.Image = global::PrintThat.Properties.Resources.door_open;
+            this.toolStripMenuItem_close.Name = "toolStripMenuItem_close";
+            this.toolStripMenuItem_close.Size = new System.Drawing.Size(250, 22);
+            this.toolStripMenuItem_close.Text = "Закрыть приложени";
+            this.toolStripMenuItem_close.Click += new System.EventHandler(this.toolStripMenuItem_close_Click);
             // 
             // panel_properties
             // 
@@ -257,7 +282,7 @@
             // 
             this.button_from.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_from.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_from.Location = new System.Drawing.Point(393, 19);
+            this.button_from.Location = new System.Drawing.Point(393, 21);
             this.button_from.Name = "button_from";
             this.button_from.Size = new System.Drawing.Size(35, 22);
             this.button_from.TabIndex = 4;
@@ -291,6 +316,18 @@
             this.panel_main.Size = new System.Drawing.Size(434, 36);
             this.panel_main.TabIndex = 14;
             // 
+            // button_printers
+            // 
+            this.button_printers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_printers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_printers.Image = global::PrintThat.Properties.Resources.receipt_printer;
+            this.button_printers.Location = new System.Drawing.Point(213, 3);
+            this.button_printers.Name = "button_printers";
+            this.button_printers.Size = new System.Drawing.Size(30, 30);
+            this.button_printers.TabIndex = 13;
+            this.button_printers.UseVisualStyleBackColor = true;
+            this.button_printers.Click += new System.EventHandler(this.button_printers_Click);
+            // 
             // button_multiplier
             // 
             this.button_multiplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -301,6 +338,29 @@
             this.button_multiplier.Text = "=V";
             this.button_multiplier.UseVisualStyleBackColor = true;
             this.button_multiplier.Click += new System.EventHandler(this.button_multiplier_Click);
+            // 
+            // button_properties
+            // 
+            this.button_properties.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_properties.Image = global::PrintThat.Properties.Resources.gearwheels;
+            this.button_properties.Location = new System.Drawing.Point(36, 3);
+            this.button_properties.Name = "button_properties";
+            this.button_properties.Size = new System.Drawing.Size(30, 30);
+            this.button_properties.TabIndex = 10;
+            this.button_properties.UseVisualStyleBackColor = true;
+            this.button_properties.Click += new System.EventHandler(this.button_properties_Click);
+            // 
+            // button_refresh
+            // 
+            this.button_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button_refresh.Image = global::PrintThat.Properties.Resources.arrow_circle;
+            this.button_refresh.Location = new System.Drawing.Point(249, 3);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(30, 30);
+            this.button_refresh.TabIndex = 8;
+            this.button_refresh.UseVisualStyleBackColor = true;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
             // button_print
             // 
@@ -343,6 +403,17 @@
             this.dgv.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgv_DragEnter);
             this.dgv.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgv_KeyDown);
             // 
+            // Column_Del
+            // 
+            this.Column_Del.Frozen = true;
+            this.Column_Del.HeaderText = "";
+            this.Column_Del.Image = global::PrintThat.Properties.Resources.delete_small;
+            this.Column_Del.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Column_Del.Name = "Column_Del";
+            this.Column_Del.ReadOnly = true;
+            this.Column_Del.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column_Del.Width = 20;
+            // 
             // Column_Check
             // 
             this.Column_Check.Frozen = true;
@@ -383,77 +454,6 @@
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewImageColumn1.Width = 20;
-            // 
-            // Column_Del
-            // 
-            this.Column_Del.Frozen = true;
-            this.Column_Del.HeaderText = "";
-            this.Column_Del.Image = global::PrintThat.Properties.Resources.delete_small;
-            this.Column_Del.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Column_Del.Name = "Column_Del";
-            this.Column_Del.ReadOnly = true;
-            this.Column_Del.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column_Del.Width = 20;
-            // 
-            // button_printers
-            // 
-            this.button_printers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_printers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_printers.Image = global::PrintThat.Properties.Resources.receipt_printer;
-            this.button_printers.Location = new System.Drawing.Point(213, 3);
-            this.button_printers.Name = "button_printers";
-            this.button_printers.Size = new System.Drawing.Size(30, 30);
-            this.button_printers.TabIndex = 13;
-            this.button_printers.UseVisualStyleBackColor = true;
-            this.button_printers.Click += new System.EventHandler(this.button_printers_Click);
-            // 
-            // button_properties
-            // 
-            this.button_properties.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_properties.Image = global::PrintThat.Properties.Resources.gearwheels;
-            this.button_properties.Location = new System.Drawing.Point(36, 3);
-            this.button_properties.Name = "button_properties";
-            this.button_properties.Size = new System.Drawing.Size(30, 30);
-            this.button_properties.TabIndex = 10;
-            this.button_properties.UseVisualStyleBackColor = true;
-            this.button_properties.Click += new System.EventHandler(this.button_properties_Click);
-            // 
-            // button_refresh
-            // 
-            this.button_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_refresh.Image = global::PrintThat.Properties.Resources.arrow_circle;
-            this.button_refresh.Location = new System.Drawing.Point(249, 3);
-            this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(30, 30);
-            this.button_refresh.TabIndex = 8;
-            this.button_refresh.UseVisualStyleBackColor = true;
-            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
-            // 
-            // toolStripMenuItem_show
-            // 
-            this.toolStripMenuItem_show.Image = global::PrintThat.Properties.Resources.window_dialog;
-            this.toolStripMenuItem_show.Name = "toolStripMenuItem_show";
-            this.toolStripMenuItem_show.Size = new System.Drawing.Size(250, 22);
-            this.toolStripMenuItem_show.Text = "Показать приложение";
-            this.toolStripMenuItem_show.Click += new System.EventHandler(this.toolStripMenuItem_show_Click);
-            // 
-            // toolStripMenuItem_updateNprint
-            // 
-            this.toolStripMenuItem_updateNprint.Enabled = false;
-            this.toolStripMenuItem_updateNprint.Image = global::PrintThat.Properties.Resources.keyboard_key_enter;
-            this.toolStripMenuItem_updateNprint.Name = "toolStripMenuItem_updateNprint";
-            this.toolStripMenuItem_updateNprint.Size = new System.Drawing.Size(250, 22);
-            this.toolStripMenuItem_updateNprint.Text = "Обновить список и распечатать";
-            this.toolStripMenuItem_updateNprint.Click += new System.EventHandler(this.toolStripMenuItem_updateNprint_Click);
-            // 
-            // toolStripMenuItem_close
-            // 
-            this.toolStripMenuItem_close.Image = global::PrintThat.Properties.Resources.door_open;
-            this.toolStripMenuItem_close.Name = "toolStripMenuItem_close";
-            this.toolStripMenuItem_close.Size = new System.Drawing.Size(250, 22);
-            this.toolStripMenuItem_close.Text = "Закрыть приложени";
-            this.toolStripMenuItem_close.Click += new System.EventHandler(this.toolStripMenuItem_close_Click);
             // 
             // Form_Main
             // 

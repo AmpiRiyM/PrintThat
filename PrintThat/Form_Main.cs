@@ -154,6 +154,9 @@ namespace PrintThat
             }
 
             files.Print();
+           
+            MessageBox.Show($"Печать документов окончена в количестве {files.Count}");
+
             files = null;
         }
 
@@ -241,15 +244,11 @@ namespace PrintThat
 
 
 
-        private void notifyIcon_main_DoubleClick(object sender, EventArgs e)
-        {
-            ShowRules();
-        }
+        private void notifyIcon_main_DoubleClick(object sender, EventArgs e) =>ShowRules();
+        
 
-        private void toolStripMenuItem_show_Click(object sender, EventArgs e)
-        {
-            ShowRules();
-        }
+        private void toolStripMenuItem_show_Click(object sender, EventArgs e) => ShowRules();
+        
 
         private void toolStripMenuItem_updateNprint_Click(object sender, EventArgs e)
         {
